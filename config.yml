@@ -1,0 +1,75 @@
+rotate:
+  3:
+    clockwise:
+      update:
+        command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) + 10)"
+        keypress:
+          RIGHTCTRL:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) + 5)"
+          LEFTCTRL:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) + 5)"
+          LEFTSHIFT:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) + 50)"
+    counterclockwise:
+      update:
+        command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) - 10)"
+        keypress:
+          RIGHTCTRL:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) - 5)"
+          LEFTCTRL:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) - 5)"
+          LEFTSHIFT:
+            command: "qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $(expr $(qdbus org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness) - 50)"
+  4:
+    clockwise:
+      begin:
+        command: "qdbus org.kde.kglobalaccel /component/mediacontrol invokeShortcut playpausemedia"
+    counterclockwise:
+      begin:
+        command: "qdbus org.kde.kglobalaccel /component/mediacontrol invokeShortcut playpausemedia"
+
+swipe:
+  3:
+    left:
+      begin:
+        command: "ydotool key 56:1 15:1 15:0 && echo left_pressed > $HOME/projects/projects_github/fusuma/fusuma_key_states" # alt, tab, release tab
+      update:
+        command: "if grep -q left_pressed $HOME/projects/projects_github/fusuma/fusuma_key_states; then ydotool key 105:1 105:0; fi"
+        interval: 3
+        threshold: 5
+    right:
+      begin:
+        command: "ydotool key 56:1 15:1 15:0 56:0"
+      update:
+        command: "if grep -q left_pressed $HOME/projects/projects_github/fusuma/fusuma_key_states; then ydotool key 106:1 106:0; fi"
+        interval: 3
+        threshold: 5
+    down:
+      update:
+        command: "if grep -q left_pressed $HOME/projects/projects_github/fusuma/fusuma_key_states; then ydotool key 108:1 108:0; fi"
+        interval: 3
+        threshold: 5
+    up:
+      update:
+        command: "if grep -q left_pressed $HOME/projects/projects_github/fusuma/fusuma_key_states; then ydotool key 103:1 103:0; fi"
+        interval: 3
+        threshold: 5
+    end:
+      command: "ydotool key 56:0 && echo > $HOME/projects/projects_github/fusuma/fusuma_key_states"
+  4:
+    down:
+      update:
+        command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut decrease_volume"
+        threshold: 1.3
+        interval: 0.7
+    up:
+      update:
+        command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut increase_volume" 
+        threshold: 1.3
+        interval: 0.7
+    right:
+      begin:
+        command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut mute"
+    left:
+      begin:
+        command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut mic_mute"
