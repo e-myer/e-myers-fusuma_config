@@ -61,10 +61,24 @@ swipe:
       update:
         command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut decrease_volume"
         interval: 0.5
+        keypress:
+          LEFTSHIFT:
+            command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut decrease_volume" 
+            interval: 0.3
+          LEFTCTRL:
+            command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut decrease_volume" 
+            interval: 2.5
     up:
       update:
         command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut increase_volume" 
         interval: 0.5
+        keypress:
+          LEFTSHIFT:
+            command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut increase_volume" 
+            interval: 0.3
+          LEFTCTRL:
+            command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut increase_volume" 
+            interval: 2.5
     right:
       begin:
         command: "qdbus org.kde.kglobalaccel /component/kmix invokeShortcut mute"
