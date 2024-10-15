@@ -62,7 +62,7 @@ This configuration relies on the following:
 
 - KDE Plasma desktop environment
 - `qdbus` for interacting with KDE's D-Bus interface
-- `ydotool` for simulating key presses
+- [ydotool](https://github.com/ReimuNotMoe/ydotool): ydotool should be installed and running, to emulate keypresses
 
 ## Notes
 
